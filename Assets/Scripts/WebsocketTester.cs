@@ -14,6 +14,11 @@ public class WebsocketTester : MonoBehaviour
 
     void Start()
     {
+        Connect();
+    }
+
+    public void Connect()
+    {
         _webSocket = new WebSocket(new Uri(wsLocalhost));
         _webSocket.OnOpen += OnWebSocketOpen;
         _webSocket.OnMessage += OnMessageReceived;
@@ -29,6 +34,9 @@ public class WebsocketTester : MonoBehaviour
 
     private void OnWebSocketClosed(WebSocket websocket, WebSocketStatusCodes code, string message)
     {
+        _webSocket.OnOpen -= OnWebSocketOpen;
+        _webSocket.OnMessage -= OnMessageReceived;
+        _webSocket.OnClosed -= OnWebSocketClosed;
         UpdateText("WebSocket is Closed!");
     }
 
