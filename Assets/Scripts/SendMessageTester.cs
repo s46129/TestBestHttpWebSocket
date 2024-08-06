@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,14 @@ public class SendMessageTester : MonoBehaviour
     private void Awake()
     {
         button.onClick.AddListener(Send);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Send();
+        }
     }
 
     void Send()
