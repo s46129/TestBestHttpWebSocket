@@ -1,11 +1,16 @@
 using System;
 using Best.WebSockets;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class WebsocketTester : MonoBehaviour
 {
     private WebSocket _webSocket;
     public string wsLocalhost = "ws://localhost:8080";
+
+    [FormerlySerializedAs("receivedText")] [SerializeField]
+    private Text DebugText;
 
     void Start()
     {
@@ -19,23 +24,28 @@ public class WebsocketTester : MonoBehaviour
 
     private void OnWebSocketOpen(WebSocket webSocket)
     {
-        Debug.Log("WebSocket is now Open!");
+        UpdateText("WebSocket is now Open!");
     }
 
     private void OnWebSocketClosed(WebSocket websocket, WebSocketStatusCodes code, string message)
     {
-        Debug.Log("WebSocket is now Closed!");
+        UpdateText("WebSocket is Closed!");
     }
 
     private void OnMessageReceived(WebSocket websocket, string message)
     {
-        Debug.Log("Received:" + message);
+        UpdateText(message);
     }
 
 
-    private void SendMessage(string message)
+    public new void SendMessage(string message)
     {
-        Debug.Log("Send :" + message);
         _webSocket.Send(message);
+        UpdateText("Send :" + message);
+    }
+
+    private void UpdateText(string message)
+    {
+        DebugText.text += $"\n{message}";
     }
 }
