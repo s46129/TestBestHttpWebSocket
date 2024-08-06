@@ -7,18 +7,12 @@ using UnityEngine.UI;
 public class WebsocketTester : MonoBehaviour
 {
     private WebSocket _webSocket;
-    public string wsLocalhost = "ws://localhost:8080";
 
     [FormerlySerializedAs("receivedText")] [SerializeField]
     private Text DebugText;
 
-    void Start()
-    {
-        Connect();
-    }
 
-
-    public void Connect()
+    public void Connect(string wsLocalhost)
     {
         _webSocket = new WebSocket(new Uri(wsLocalhost));
         _webSocket.OnOpen += OnWebSocketOpen;
