@@ -75,3 +75,10 @@ crashlytics-build.properties
 com.Tivadar.Best.HTTP.xml
 com.Tivadar.Best.WebSockets.xml
 ProjectSettings/EditorSettings.asset
+
+.idea\
+.idea/.idea.TestBestHttpWebSocket/.idea/discord.xml
+.idea/.idea.TestBestHttpWebSocket/.idea/encodings.xml
+.idea/.idea.TestBestHttpWebSocket/.idea/indexLayout.xml
+.idea/.idea.TestBestHttpWebSocket/.idea/inspectionProfiles/Project_Default.xml
+.idea/.idea.TestBestHttpWebSocket/.idea/vcs.xml
