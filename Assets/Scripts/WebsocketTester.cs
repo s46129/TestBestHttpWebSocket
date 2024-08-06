@@ -17,6 +17,7 @@ public class WebsocketTester : MonoBehaviour
         Connect();
     }
 
+
     public void Connect()
     {
         _webSocket = new WebSocket(new Uri(wsLocalhost));
@@ -27,6 +28,20 @@ public class WebsocketTester : MonoBehaviour
         _webSocket.Open();
     }
 
+    public void Disconnect()
+    {
+        if (_webSocket == null)
+        {
+            return;
+        }
+
+        _webSocket.OnOpen -= OnWebSocketOpen;
+        _webSocket.OnMessage -= OnMessageReceived;
+        _webSocket.OnClosed -= OnWebSocketClosed;
+        _webSocket.Close();
+        _webSocket = null;
+    }
+
     private void OnWebSocketOpen(WebSocket webSocket)
     {
         UpdateText("WebSocket is now Open!");
@@ -34,9 +49,6 @@ public class WebsocketTester : MonoBehaviour
 
     private void OnWebSocketClosed(WebSocket websocket, WebSocketStatusCodes code, string message)
     {
-        _webSocket.OnOpen -= OnWebSocketOpen;
-        _webSocket.OnMessage -= OnMessageReceived;
-        _webSocket.OnClosed -= OnWebSocketClosed;
         UpdateText("WebSocket is Closed!");
     }
 
